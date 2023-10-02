@@ -4,7 +4,7 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-      <h1>Cadastro Mercado</h1>
+      <h1>OcaMarket</h1>
     </div>
   );
 }
