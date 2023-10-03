@@ -1,7 +1,16 @@
 
+import { useState } from 'react';
 import './App.scss';
 
 function App() {
+
+  const[nomeProduto, setNomeProduto] = useState('');
+  const[tipo, setTipo] = useState('');
+  const[valor, setValor] = useState('');
+  const[validade, setValidade] = useState('');
+  const[codigo, setCodigo] = useState('')
+
+
   return (
     <div className="pagina-mercado">
       <header>
@@ -35,7 +44,6 @@ function App() {
             <h5>Validade</h5>
             <input type='data'></input>
           </div>
-
 
           <button>ADICIONAR</button>
         </div>
