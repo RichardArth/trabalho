@@ -1,37 +1,40 @@
 import conexao from './connection.js'
 
-export async function inserir(comida) {
-    let comando = 'insert into tb_comida(nm_comida, tp_comida, vl_preco, qtd_estoque, dt_validade) values(?, ?, ?, ?, ?)'
+export async function inserir(produto) {
+    let comando = 'insert into tb_mercado(nm_comida, tp_comida, vl_preco,cd_produto, qtd_estoque, dt_validade) values(?, ?, ?, ?, ?, ?)'
 
     let [resp] = await conexao.query(comando,
         [
-            comida.nome,
-            comida.tipo,
-            comida.preco,
-            comida.estoque,
-            comida.validade
+            produto.nome,
+            produto.tipo,
+            produto.preco,
+            produto.codigo,
+            produto.estoque,
+            produto.validade
         ])
 
-    comida.id = resp.insertId;
-    return comida
+    produto.id = resp.insertId;
+    return produto
 }
 
-export async function alterar(id, comida) {
-    let comando = `update tb_comida 
+export async function alterar(id, produto) {
+    let comando = `update tb_mercado
     set nm_comida = ?,
     tp_comida = ?, 
-    vl_preco = ?, 
+    vl_preco = ?,
+    cd_produto = ?, 
     qtd_estoque = ?,
     dt_validade = ?
     where id_comida = ?`
 
     let [resp] = await conexao.query(comando,
         [
-            comida.nome,
-            comida.tipo,
-            comida.preco,
-            comida.estoque,
-            comida.validade,
+            produto.nome,
+            produto.tipo,
+            produto.preco,
+            produto.codigo,
+            produto.estoque,
+            produto.validade,
             id
         ])
 
@@ -41,7 +44,7 @@ export async function alterar(id, comida) {
 
 export async function deletar(id) {
     let comando = `
-        delete from tb_comida
+        delete from tb_mercado
                 where id_comida = ?
     `
 
@@ -56,10 +59,11 @@ export async function consultar(nome) {
                nm_comida    as nome,
                tp_comida    as tipo,
                vl_preco     as preco,
+               cd_produto   as codigo,
                qtd_estoque  as estoque,
                dt_validade  as validade
                
-        from tb_comida
+        from tb_mercado
        where nm_comida like ?
     `
 
